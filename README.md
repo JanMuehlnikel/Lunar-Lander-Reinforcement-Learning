@@ -6,7 +6,7 @@ This project has been implemented with the gymnasium Framework: [https://gymnasi
 <img src="data/images/ep_100.gif" alt="Successful Try" width="600" height="400">
 <br>
 
-## Final Try
+## Trained Agent
 <img src="data/images/final.gif" alt="Bad Try" width="600" height="400">
 <br>
 
