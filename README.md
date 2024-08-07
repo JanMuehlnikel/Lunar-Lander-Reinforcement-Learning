@@ -4,8 +4,8 @@ This project has been implemented with the gymnasium Framework: [https://gymnasi
 
 <table>
   <tr>
-    <th>Successful Try</th>
-    <th>Bad Try</th>
+    <th>Minimal Trained</th>
+    <th>Final</th>
   </tr>
   <tr>
     <td><img src="data/images/ep_100.gif" alt="Untrained Agent" width="400" height="250"></td>
