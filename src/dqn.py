@@ -6,7 +6,6 @@ import torch.optim as optim
 import random
 import os
 from collections import namedtuple, deque
-import matplotlib.pyplot as plt
 
 class QNetwork(nn.Module):
     def __init__(self, state_size, action_size):
@@ -99,46 +98,35 @@ def run_dqn(n_episodes=2000, max_trys=1000, eps_start=1.0, eps_end=0.01, eps_dec
     scores_window = deque(maxlen=100)
     eps = eps_start
 
-    # Create a directory to save the models
-    if not os.path.exists('models'):
-        os.makedirs('models')
+    log_file_path = 'data/logs/training_log.csv'
+    with open(log_file_path, 'w') as log_file:
+        log_file.write('Episode,Score,Epsilon\n')
 
-    for i_episode in range(1, n_episodes+1):
-        state, _ = env.reset()
-        score = 0
-        for t in range(max_trys):
-            action = agent.act(state, eps)
-            next_state, reward, done, _, _ = env.step(action)
-            agent.step(state, action, reward, next_state, done)
-            state = next_state
-            score += reward
-            if done:
+        for i_episode in range(1, n_episodes + 1):
+            state, _ = env.reset()
+            score = 0
+            for t in range(max_trys):
+                action = agent.act(state, eps)
+                next_state, reward, done, _, _ = env.step(action)
+                agent.step(state, action, reward, next_state, done)
+                state = next_state
+                score += reward
+                if done:
+                    break
+            scores_window.append(score)
+            scores.append(score)
+            eps = max(eps_end, eps_decay * eps)
+
+            log_file.write(f'{i_episode},{score:.2f},{eps:.2f}\n')
+
+            print(f"\rEpisode {i_episode}\tAverage Score: {np.mean(scores_window):.2f}\tEpsilon: {eps:.2f}", end="")
+            if i_episode % 100 == 0:
+                print(f"\rEpisode {i_episode}\tAverage Score: {np.mean(scores_window):.2f}\tEpsilon: {eps:.2f}")
+                torch.save(agent.qnetwork_local.state_dict(), f'data/checkpoints/checkpoint_{i_episode}.pth')
+
+            if np.mean(scores_window) >= 200.0:
+                print(f"\nEnvironment solved in {i_episode-100} episodes!\tAverage Score: {np.mean(scores_window):.2f}\tEpsilon: {eps:.2f}")
+                torch.save(agent.qnetwork_local.state_dict(), 'data/checkpoints/checkpoint_final.pth')
                 break
-        scores_window.append(score)
-        scores.append(score)
-        eps = max(eps_end, eps_decay*eps)
-
-        print(f"\rEpisode {i_episode}\tAverage Score: {np.mean(scores_window):.2f}", end="")
-        if i_episode % 100 == 0:
-            print(f"\rEpisode {i_episode}\tAverage Score: {np.mean(scores_window):.2f}")
-            torch.save(agent.qnetwork_local.state_dict(), f'data/checkpoints/checkpoint_{i_episode}.pth')
-
-        if np.mean(scores_window) >= 200.0:
-            print(f"\nEnvironment solved in {i_episode-100} episodes!\tAverage Score: {np.mean(scores_window):.2f}")
-            torch.save(agent.qnetwork_local.state_dict(), 'data/checkpoints/checkpoint_final.pth')
-            break
 
     return scores
-
-"""
-scores = run_dqn()
-
-# Plot the scores
-plt.figure()
-plt.plot(np.arange(len(scores)), scores)
-plt.ylabel('Score')
-plt.xlabel('Episode #')
-plt.show()
-
-env.close()
-"""
