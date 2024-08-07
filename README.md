@@ -14,15 +14,14 @@ This project has been implemented with the gymnasium Framework: [https://gymnasi
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/JanMuehlnikel/Atari-Freeway-Reinforcement-Learning
+    git clone [https://github.com/JanMuehlnikel/Atari-Freeway-Reinforcement-Learning](https://github.com/JanMuehlnikel/Lunar-Lander-Reinforcement-Learning)
     cd your-repo
     ```
 
 2. **Create and Activate a New Conda Environment**:
     ```bash
-    conda create --name FreewayEnv python=3.10.14
-    conda activate FreewayEnv
-    ```
+    conda create --name LunarEnv python=3.10
+    conda activate LunarEnv
 
 3. **Install `pip` in the New Conda Environment**:
     ```bash
