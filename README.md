@@ -2,8 +2,11 @@
 
 This project has been implemented with the gymnasium Framework: [https://gymnasium.farama.org/environments/atari/freeway/](https://gymnasium.farama.org/environments/box2d/lunar_lander/)
 
-
 <table>
+  <tr>
+    <th>Successful Try</th>
+    <th>Bad Try</th>
+  </tr>
   <tr>
     <td><img src="data/images/ep_100.gif" alt="Successful Try" width="400" height="250"></td>
     <td><img src="data/images/final.gif" alt="Bad Try" width="400" height="250"></td>
