@@ -8,6 +8,7 @@ import torch.nn as nn
 import torch.optim as optim
 import random
 import os
+import glob
 from collections import namedtuple, deque
 
 """
@@ -228,6 +229,11 @@ def run_dqn(n_episodes=2000, max_trys=1000, eps_start=1.0, eps_end=0.01, eps_dec
     scores_window = deque(maxlen=100)
     eps = eps_start
 
+    # remove old checkpoint files
+    files = glob.glob(os.path.join("data/checkpoints", '*'))
+    for f in files:
+        os.remove(f)
+
     log_file_path = 'data/logs/training_log.csv'
     with open(log_file_path, 'w') as log_file:
         log_file.write('Episode,Score,Epsilon\n')
@@ -255,7 +261,7 @@ def run_dqn(n_episodes=2000, max_trys=1000, eps_start=1.0, eps_end=0.01, eps_dec
                 torch.save(agent.qnetwork_local.state_dict(), f'data/checkpoints/checkpoint_{i_episode}.pth')
 
             if np.mean(scores_window) >= 200.0:
-                print(f"\nEnvironment solved in {i_episode-100} episodes!\tAverage Score: {np.mean(scores_window):.2f}\tEpsilon: {eps:.2f}")
+                print(f"\nEnvironment solved in {i_episode} episodes!\tAverage Score: {np.mean(scores_window):.2f}\tEpsilon: {eps:.2f}")
                 torch.save(agent.qnetwork_local.state_dict(), 'data/checkpoints/checkpoint_final.pth')
                 break
 
