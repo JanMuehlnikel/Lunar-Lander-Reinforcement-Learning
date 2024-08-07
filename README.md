@@ -8,8 +8,8 @@ This project has been implemented with the gymnasium Framework: [https://gymnasi
     <th>Bad Try</th>
   </tr>
   <tr>
-    <td><img src="data/images/ep_100.gif" alt="Successful Try" width="400" height="250"></td>
-    <td><img src="data/images/final.gif" alt="Bad Try" width="400" height="250"></td>
+    <td><img src="data/images/ep_100.gif" alt="Untrained Agent" width="400" height="250"></td>
+    <td><img src="data/images/final.gif" alt="Final Agent" width="400" height="250"></td>
   </tr>
 </table>
 
