@@ -5,8 +5,8 @@ This project has been implemented with the gymnasium Framework: [https://gymnasi
 
 <table>
   <tr>
-    <td><img src="data/images/ep_100.gif" alt="Successful Try" width="600" height="400"></td>
-    <td><img src="data/images/final.gif" alt="Bad Try" width="600" height="400"></td>
+    <td><img src="data/images/ep_100.gif" alt="Successful Try" width="400" height="250"></td>
+    <td><img src="data/images/final.gif" alt="Bad Try" width="400" height="250"></td>
   </tr>
 </table>
 
